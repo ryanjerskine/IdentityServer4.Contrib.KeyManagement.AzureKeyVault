@@ -1,5 +1,7 @@
 # IdentityServer4.Contrib.KeyManagement.AzureKeyVault
 
+[![Build status](https://ci.appveyor.com/api/projects/status/3ft7u9bpdtcmh3ey?svg=true)](https://ci.appveyor.com/project/ryanjerskine/identityserver4-contrib-keymanagement-azurekeyvaul)
+
 `Install-Package IdentityServer4.Contrib.KeyManagement.AzureKeyVault`
 
 Call .AddSigningCredentialFromAzureKeyVault:

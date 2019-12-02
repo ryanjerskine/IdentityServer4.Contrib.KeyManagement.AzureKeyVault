@@ -6,3 +6,8 @@ build:
   project: IdentityServer4.KeyManagement.AzureKeyVault.csproj
   publish_nuget: true
   verbosity: minimal
+deploy:
+- provider: NuGet
+  api_key:
+    secure: L7d2fchu9uKPlfpk4Ab2Ro8Bsodzt505EKy2JOXqaa/11ZqvlTvfwGWOj8h2wsnX
+  skip_symbols: true
