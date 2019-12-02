@@ -1,5 +1,5 @@
 version: 1.0.{build}
-image: Visual Studio 2017
+image: Visual Studio 2019
 build:
   project: IdentityServer4.KeyManagement.AzureKeyVault.csproj
   publish_nuget: true
