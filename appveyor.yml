@@ -1,0 +1,6 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+build:
+  project: IdentityServer4.KeyManagement.AzureKeyVault.csproj
+  publish_nuget: true
+  verbosity: minimal
