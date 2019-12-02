@@ -10,6 +10,7 @@
     <PackageTags>Identity, OAuth2, OAuth, 2.0, IdentityServer, OpenID, Connect, Security, IdentityServer4</PackageTags>
     <Copyright></Copyright>
     <Description>IdentityServer4 key management via Azure Key Vault certificates.</Description>
+    <PackageId>IdentityServer4.Contrib.KeyManagement.AzureKeyVault</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
