@@ -1,6 +1,6 @@
-﻿using IdentityServer4.Models;
+﻿using Azure.Core;
+using IdentityServer4.Models;
 using IdentityServer4.Stores;
-using Microsoft.Azure.KeyVault;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace IdentityServer4.KeyManagement.AzureKeyVault
         private readonly IMemoryCache _Cache;
         private readonly string _CertificateName;
 
-        public AzureKeyVaultValidationKeysStore(IMemoryCache memoryCache, KeyVaultClient keyVaultClient, string vault, string certificateName) : base(keyVaultClient, vault)
+        public AzureKeyVaultValidationKeysStore(IMemoryCache memoryCache, TokenCredential tokenCredential, string vault, string certificateName) : base(tokenCredential, vault)
         {
             this._Cache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
             this._CertificateName = certificateName ?? throw new ArgumentNullException(nameof(certificateName));

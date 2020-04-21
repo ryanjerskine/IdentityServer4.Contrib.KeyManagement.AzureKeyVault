@@ -6,27 +6,30 @@
 
 Call .AddSigningCredentialFromAzureKeyVault:
 ```
+using Azure.Identity;
 using IdentityServer4.KeyManagement.AzureKeyVault;
 
 public void ConfigureServices(IServiceCollection services)
 {
   ...
   services.AddIdentityServer()
-    .AddSigningCredentialFromAzureKeyVault(Configuration["AzureKeyVault:Url"], "<My Key vault client id>", "<My key vault secret>", "<My Cert Name>", <Signing Key Rollover period in hours>);
+    .AddSigningCredentialFromAzureKeyVault(Configuration["AzureKeyVault:Url"], "<My Cert Name>", <Signing Key Rollover period in hours>, new ClientSecretCredential("<AAD tenant id>", "<My Key vault client id>", "<My key vault secret>"));
   ...
 }
 ```
 or if you are using MSI:
 ```
+using Azure.Identity;
 using IdentityServer4.KeyManagement.AzureKeyVault;
 
 public void ConfigureServices(IServiceCollection services)
 {
   ...
   services.AddIdentityServer()
-    .AddSigningCredentialFromAzureKeyVault(Configuration["AzureKeyVault:Url"], "<My Cert Name>", <Signing Key Rollover period in hours>);
+    .AddSigningCredentialFromAzureKeyVault(Configuration["AzureKeyVault:Url"], "<My Cert Name>", <Signing Key Rollover period in hours>, new DefaultAzureCredential());
   ...
 }
  ```
+
 This will add all enabled versions of the specified certificate to the ValidationKey set. The current version of the certificate will be used as the signing certificate.
 Keys are cached for 24hrs to improve performance. If you are utilizing MSI, make sure it is supported with how you are hosting the application.
