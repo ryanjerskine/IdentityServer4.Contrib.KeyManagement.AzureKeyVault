@@ -1,5 +1,5 @@
-﻿using IdentityServer4.Stores;
-using Microsoft.Azure.KeyVault;
+﻿using Azure.Core;
+using IdentityServer4.Stores;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -14,7 +14,7 @@ namespace IdentityServer4.KeyManagement.AzureKeyVault
         private readonly string _CertificateName;
         private readonly int _SigningKeyRolloverTimeInHours;
 
-        public AzureKeyVaultSigningCredentialStore(IMemoryCache memoryCache, KeyVaultClient keyVaultClient, string vault, string certificateName, int signingKeyRolloverTimeInHours) : base(keyVaultClient, vault)
+        public AzureKeyVaultSigningCredentialStore(IMemoryCache memoryCache, TokenCredential tokenCredential, string vault, string certificateName, int signingKeyRolloverTimeInHours) : base(tokenCredential, vault)
         {
             this._Cache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
             this._CertificateName = certificateName ?? throw new ArgumentNullException(nameof(certificateName));
@@ -50,7 +50,7 @@ namespace IdentityServer4.KeyManagement.AzureKeyVault
 
             // Find the first certificate version that has a passed rollover time
             var certificateVersionWithPassedRolloverTime = enabledCertificateVersions
-              .FirstOrDefault(certVersion => certVersion.Attributes.Created.HasValue && certVersion.Attributes.Created.Value < DateTime.UtcNow.AddHours(-this._SigningKeyRolloverTimeInHours));
+              .FirstOrDefault(certVersion => certVersion.Properties.CreatedOn.HasValue && certVersion.Properties.CreatedOn.Value < DateTime.UtcNow.AddHours(-this._SigningKeyRolloverTimeInHours));
 
             // If no certificate with passed rollovertime was found, pick the first enabled version of the certificate (This can happen if it's a newly created certificate)
             if (certificateVersionWithPassedRolloverTime == null)
