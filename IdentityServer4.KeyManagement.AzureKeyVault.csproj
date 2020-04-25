@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -11,6 +10,7 @@
     <Copyright></Copyright>
     <Description>IdentityServer4 key management via Azure Key Vault certificates.</Description>
     <PackageId>IdentityServer4.Contrib.KeyManagement.AzureKeyVault</PackageId>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
